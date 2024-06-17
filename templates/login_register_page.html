@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Starting Page</title>
+    <style>
+        /* Center alignment for the whole content */
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            /* Gradient background */
+            background: linear-gradient(to bottom, #2980B9, #6DD5FA);
+            color: #fff; /* Text color */
+            font-family: Arial, sans-serif;
+        }
+
+        .centered {
+            text-align: center;
+        }
+
+        /* Style adjustments for the main heading */
+        .main-heading {
+            font-size: 36px;
+            margin-bottom: 30px;
+        }
+
+        /* Style adjustments for the card */
+        .card {
+            width: 500px;
+            border-radius: 25px;
+            padding: 100px;
+            text-align: center;
+            background-color: #fff;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column-reverse;
+            align-items: center;
+        }
+
+        /* Style adjustments for the links inside the card */
+        .link-container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            width: 100%;
+        }
+
+        .card-link {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #2980B9;
+            color: #fff;
+            text-decoration: none;
+            font-size: 18px;
+            transition: background-color 0.3s ease;
+        }
+
+        .card-link:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="centered">
+        <div class="main-heading">
+            <p>Welcome to Music World</p>
+        </div>
+        <div class="card">
+            <div class="link-container">
+                <a href="{{ url_for('register') }}" class="card-link">Register</a>
+                <a href="{{ url_for('login') }}" class="card-link">Login</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

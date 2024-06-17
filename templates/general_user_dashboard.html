@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="{{ url_for('all_dashboard') }}">Back to Dashboard</a>
+        <div class="navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container mt-5 ">
+    <div class="card">
+        <div class="card-body p-3 mb-2 bg-primary-subtle text-emphasis-warning">
+            <h2 class="card-title text-center">Welcome, General User!</h2>
+            <p class="text-center">View the latest albums here:</p>
+
+            <div class="card-group">
+                {% for album in albums %}
+                    <div class="card p-3 mb-2 bg-primary-subtle text-emphasis-danger">
+                        <div class="card-body ">
+                            <h5 class="card-title">{{ album.name }}</h5>
+                            <p class="card-text"><strong>Artist:</strong> {{ album.artist }}</p>
+                            <p class="card-text"><strong>Genre:</strong> {{ album.genre }}</p>
+                            <a href="{{ url_for("get_songs", album_id = album.id) }}" class="btn btn-dark btn-sm">Open</a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+
+            <div class="text-center mt-3">
+                <a href="./all_dashboard/create_playlist" class="btn btn-dark btn-sm">Add Playlist</a>
+                <a href="./all_dashboard/playlists" class="btn btn-dark btn-sm">Show Playlist</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ album.name }}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+   
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="{{ url_for('all_dashboard') }}">Back to Dashboard</a>
+            <div class="navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="row">
+                <h2 class="text-center">{{ album.name }}</h2>
+                <h5 class="text-center">Songs</h5>
+                <div class="card-group">
+                {% for song in songs %}
+                    <div class="card text-center border-dark">
+                        <h6 class="card-header">{{ song.name }}</h6>  
+                        <div class="card-body">
+                            <form method="post" action="{{ url_for('add_to_playlist', song_id=song.id) }}">
+                                <div class="form-row align-items-center">
+                                    <div class="col-auto my-3">
+                                        <label class="mr-sm-2" for="playlist_name">Playlists</label>
+                                        <select class="form-select form-select-sm" id="playlist_name" name="playlist_name">
+                                            <option selected>Open this menu</option>
+                                            {% for name in playlist_name %}
+                                                <option value="{{ name }}">{{ name }}</option>
+                                            {% endfor %}
+                                        </select>
+                                        <button type="submit" class="btn btn-dark" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">Add to Playlist</button>
+                                    </div>
+                                </div>
+                            </form>
+                            Your current rating for the song is 
+                            <span class="rating">&#9733; {{ rating[songs.index(song)] }}</span>
+                            <div>
+                                <button class="btn btn-dark btn-sm"><a href="{{ url_for('show_lyrics', song_id=song.id) }}" style="color:inherit; text-decoration: inherit;">Show Lyrics</a></button>
+                            </div>
+                            <div class="card-footer">
+                                <small class="text-body-secondary">
+                                <form method="post" action="{{ url_for('rate', song_id=song.id) }}">   
+                                    {% for i in range(1, 6) %}
+                                        <button type="submit" value="{{ i }}" name="rating" class="btn btn-dark btn-sm">&#9733;{{i}}</button>
+                                    {% endfor %}                                          
+                                </form>
+                                </small>
+                            </div>   
+                        </div>
+                    </div>        
+                {% endfor %} 
+            </div>
+        </div>
+    </div>
+    </div>
+</body>
+</html>
